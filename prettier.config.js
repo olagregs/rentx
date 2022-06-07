@@ -1,0 +1,1 @@
+export const sigleQuote = false;
