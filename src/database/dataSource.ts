@@ -8,17 +8,18 @@ const dataSource = new DataSource({
   username: "docker",
   password: "ignite",
   database: "rentx",
-  migrations: ["./src/database/migrations/*.ts"],
+  migrations: ["src/database/migrations/*.ts"],
+  entities: ["src/modules/cars/entities/*.ts"]
 });
 
-// dataSource.initialize().then(() => {
-//   console.log("DataSource initialized!");
-// }).catch((err) => {
-//   console.log("Error during inicialization", err);
-// });
+export async function createConnection(host = '127.0.0.1') {
+  dataSource.setOptions({ host });
 
-export function createConnection(host = 'database_ignite') {
-  return dataSource.setOptions({ host }).initialize();
+  if (!dataSource.isInitialized) {
+    await dataSource.initialize();
+
+    return dataSource;
+  }
 }
 
 export { dataSource }
