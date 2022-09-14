@@ -1,16 +1,16 @@
 import { inject, injectable } from "tsyringe";
-import { hash } from 'bcrypt';
+import { hash } from 'bcryptjs';
 
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { UsersRepository } from "../../repositories/implementations/UsersRepository";
-import { createConnection } from '../../../../database/dataSource';
-import { AppError } from "../../../../errors/AppError";
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
+import { createConnection } from '@shared/infra/typeorm/dataSource';
+import { AppError } from "@shared/errors/AppError";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 
 @injectable()
 class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: UsersRepository
+    private usersRepository: IUsersRepository
   ) { }
 
   async execute({ name, password, email, driver_license }: ICreateUserDTO): Promise<void> {

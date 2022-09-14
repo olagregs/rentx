@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
-import { createConnection } from "../../../../database/dataSource";
-import { Category } from "../../entities/Category";
-import { ICategoryRepository } from "../../repositories/IcategoriesRepository";
+import { createConnection } from "@shared/infra/typeorm/dataSource";
+import { Category } from "@modules/cars/infra/typeorm/entities/Category";
+import { ICategoryRepository } from "@modules/cars/repositories/IcategoriesRepository";
 
 @injectable()
 class ListCategoriesUseCase {

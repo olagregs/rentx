@@ -1,10 +1,10 @@
 import { inject, injectable } from "tsyringe";
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import { sign } from "jsonwebtoken";
 
-import { UsersRepository } from "../../repositories/implementations/UsersRepository";
-import { createConnection } from "../../../../database/dataSource";
-import { AppError } from "../../../../errors/AppError";
+import { createConnection } from "@shared/infra/typeorm/dataSource";
+import { AppError } from "@shared/errors/AppError";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 
 interface IRequest {
   email: string;
@@ -23,7 +23,7 @@ interface IResponse {
 class AuthenticateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: UsersRepository
+    private usersRepository: IUsersRepository
   ) { }
 
   async execute({ email, password }: IRequest): Promise<IResponse> {

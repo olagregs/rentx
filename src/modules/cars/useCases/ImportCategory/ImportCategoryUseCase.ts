@@ -2,8 +2,8 @@ import fs from 'fs';
 import { parse } from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
 
-import { ICategoryRepository } from '../../repositories/IcategoriesRepository';
-import { createConnection } from '../../../../database/dataSource';
+import { ICategoryRepository } from '@modules/cars/repositories/IcategoriesRepository';
+import { createConnection } from '@shared/infra/typeorm/dataSource';
 
 interface IImportCategory {
   name: string,
