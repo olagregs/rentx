@@ -4,11 +4,18 @@ import { DataSource } from "typeorm";
 import { User } from '@modules/accounts/infra/typeorm/entities/User';
 import { Category } from '@modules/cars/infra/typeorm/entities/Category';
 import { Specification } from '@modules/cars/infra/typeorm/entities/Specification';
+import { Car } from '@modules/cars/infra/typeorm/entities/Car';
 import { CreateCategories1658352228911 } from '@shared/infra/typeorm/migrations/1658352228911-CreateCategories';
 import { CreateSpecifications1658965983839 } from '@shared/infra/typeorm/migrations/1658965983839-CreateSpecifications';
 import { CreateUsers1661807580205 } from '@shared/infra/typeorm/migrations/1661807580205-CreateUsers';
 import { AlterUserDeleteUsername1661814870720 } from '@shared/infra/typeorm/migrations/1661814870720-AlterUserDeleteUsername';
 import { AlterUserAddAvatar1661895520259 } from '@shared/infra/typeorm/migrations/1661895520259-AlterUserAddAvatar';
+import { CreateCars1663368018590 } from './migrations/1663368018590-CreateCars';
+import { CreateSpecificationsCars1664317865460 } from './migrations/1664317865460-CreateSpecificationsCars';
+import { CreateCarImage1664834863881 } from './migrations/1664834863881-CreateCarImage';
+import { CarImage } from '@modules/cars/infra/typeorm/entities/CarImage';
+import { CreateRentals1665434474411 } from './migrations/1665434474411-CreateRentals';
+import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -22,23 +29,30 @@ const dataSource = new DataSource({
     CreateSpecifications1658965983839,
     CreateUsers1661807580205,
     AlterUserDeleteUsername1661814870720,
-    AlterUserAddAvatar1661895520259
+    AlterUserAddAvatar1661895520259,
+    CreateCars1663368018590,
+    CreateSpecificationsCars1664317865460,
+    CreateCarImage1664834863881,
+    CreateRentals1665434474411
   ],
   entities: [
     Category,
     Specification,
-    User
+    User,
+    Car,
+    CarImage,
+    Rental
   ]
 });
 
-export async function createConnection(host = '127.0.0.1') {
+export async function createConnection(host = '127.0.0.1'): Promise<DataSource> {
   dataSource.setOptions({ host });
 
   if (!dataSource.isInitialized) {
     await dataSource.initialize();
-
-    return dataSource;
   }
+
+  return dataSource;
 }
 
 export { dataSource }

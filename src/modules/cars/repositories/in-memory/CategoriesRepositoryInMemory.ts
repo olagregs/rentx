@@ -1,7 +1,6 @@
 import { Category } from "@modules/cars/infra/typeorm/entities/Category";
 import { ICategoryRepository, ICreateCategoryDTO } from "../IcategoriesRepository";
 
-
 class CategoriesRepositoryInMemory implements ICategoryRepository {
   categories: Category[] = [];
 
@@ -26,7 +25,6 @@ class CategoriesRepositoryInMemory implements ICategoryRepository {
 
     return category;
   }
-
 }
 
 export { CategoriesRepositoryInMemory }
