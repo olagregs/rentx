@@ -45,8 +45,13 @@ const dataSource = new DataSource({
   ]
 });
 
-export async function createConnection(host = '127.0.0.1'): Promise<DataSource> {
-  dataSource.setOptions({ host });
+export default async (host = 'database_ignite'): Promise<DataSource> => {
+  const defaultOptions = dataSource.options;
+
+  Object.assign(defaultOptions, {
+    host: process.env.NODE_ENV === "test" ? "localhost" : host,
+    database: process.env.NODE_ENV === "test" ? "rentx_test" : defaultOptions.database
+  });
 
   if (!dataSource.isInitialized) {
     await dataSource.initialize();

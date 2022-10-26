@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { compare } from 'bcryptjs';
 import { sign } from "jsonwebtoken";
 
-import { createConnection } from "@shared/infra/typeorm/dataSource";
+import createConnection from "@shared/infra/typeorm/dataSource";
 import { AppError } from "@shared/errors/AppError";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 

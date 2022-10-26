@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 
-import { createConnection } from "@shared/infra/typeorm/dataSource";
 import { AppError } from "@shared/errors/AppError";
 import { ICategoryRepository } from "@modules/cars/repositories/IcategoriesRepository";
 
@@ -16,8 +15,6 @@ class CreateCategoryUseCase {
     private categoriesRepository: ICategoryRepository) { }
 
   async execute({ name, description }: IRequest): Promise<void> {
-    await createConnection();
-
     const categoryAlreadyExists = await this.categoriesRepository.findByName(name);
 
     if (categoryAlreadyExists) {

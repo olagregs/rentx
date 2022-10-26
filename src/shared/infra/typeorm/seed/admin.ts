@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
 import { hash } from 'bcryptjs';
 
-import { createConnection } from "../dataSource";
+import createConnection from "../dataSource";
 
 async function create() {
   const connection = await createConnection();

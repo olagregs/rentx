@@ -9,7 +9,7 @@
     "migration:create": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create ./src/shared/infra/typeorm/migrations/migrationName",
     "migrations:run": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/shared/infra/typeorm/dataSource.ts",
     "migration:revert": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./src/shared/infra/typeorm/dataSource.ts",
-    "test": "jest",
+    "test": "SET \"NODE_ENV=test\" && jest --runInBand",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "ts-jest": "^29.0.1",
     "tsconfig-paths": "^4.1.0",
     "tsyringe": "^4.7.0",
+    "supertest": "^6.3.0",
     "typeorm": "^0.3.7",
     "uuid": "^8.3.2"
   },
@@ -36,6 +37,7 @@
     "@types/jest": "^29.0.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/multer": "^1.4.7",
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",

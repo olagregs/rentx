@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 
-import { createConnection } from "@shared/infra/typeorm/dataSource";
 import { AppError } from "@shared/errors/AppError";
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
 
@@ -16,8 +15,6 @@ class CreateSpecificationUseCase {
     private specificationsRepository: ISpecificationsRepository) { }
 
   async execute({ name, description }: IRequest): Promise<void> {
-    await createConnection();
-
     const specificationAlreadyExists = await this.specificationsRepository.findByName(name);
 
     if (specificationAlreadyExists) {
