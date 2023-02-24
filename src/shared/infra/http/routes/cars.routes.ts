@@ -6,7 +6,8 @@ import { CreateCarController } from '@modules/cars/useCases/CreateCar/CreateCarC
 import { ListAvailableCarsController } from '@modules/cars/useCases/ListAvailableCar/ListAvailableCarsController';
 import { CreateCarSpecificationController } from '@modules/cars/useCases/CreateCarSpecification/CreateCarSpecificationController';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
-import { UploadCarImagesController } from '@modules/cars/useCases/UploadCarImage/UploadCarImagesController';
+import { ensureAdmin } from '../middlewares/ensureAdmin';
+import { UploadCarImagesController } from '@modules/cars/useCases/UploadCarImage/UploadCarImagesController'
 
 const carsRoutes = Router();
 
@@ -17,11 +18,9 @@ const listAvailableCarsController = new ListAvailableCarsController();
 const createCarsSpecificationsController = new CreateCarSpecificationController();
 const uploadCarsImagesContrller = new UploadCarImagesController();
 
-carsRoutes.post("/", ensureAuthenticated, /*ensureAdmin,*/ createCarController.handle);
+carsRoutes.post("/", ensureAuthenticated, ensureAdmin, createCarController.handle);
 carsRoutes.get("/available", listAvailableCarsController.handle);
-carsRoutes.post("/specifications", ensureAuthenticated, /*ensureAdmin,*/ createCarsSpecificationsController.handle)
-carsRoutes.post("/images/:id", ensureAuthenticated, /*ensureAdmin,*/ upload.array("images"), uploadCarsImagesContrller.handle);
-
-// Checar middleware ensureAdmin
+carsRoutes.post("/specifications", ensureAuthenticated, ensureAdmin, createCarsSpecificationsController.handle)
+carsRoutes.post("/images/:id", ensureAuthenticated, ensureAdmin, upload.array("images"), uploadCarsImagesContrller.handle);
 
 export { carsRoutes }

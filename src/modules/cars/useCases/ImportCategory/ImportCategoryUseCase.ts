@@ -3,6 +3,7 @@ import { parse } from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
 
 import { ICategoryRepository } from '@modules/cars/repositories/IcategoriesRepository';
+import createConnection from '@shared/infra/typeorm/dataSource';
 
 interface IImportCategory {
   name: string,
@@ -45,6 +46,8 @@ class ImportCategoryUseCase {
   }
 
   async execute(file: Express.Multer.File): Promise<void> {
+    await createConnection();
+
     const categories = await this.loadCategories(file);
 
     categories.map(async category => {

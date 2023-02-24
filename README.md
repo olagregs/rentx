@@ -55,3 +55,22 @@
 - O aluguel deve ter duração mínima de 24 horas;
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuário;
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo carro;
+
+# Listagem de ALgueis para Carro
+
+**RF**
+- Deve ser possível realizar a busca de todos os alugueis para o usuário;
+
+**RN**
+- O usuário deve estar logado na aplicação;
+
+# Recuperação de Senha
+
+**RF**
+- Deve ser possível o usuário recuperar a senha informando o e-mail;
+- O usuário deve receber um e-mail com o passo-a-passo para recuperação de senha;
+- O usuário deve conseguir inserir uma nova senha;
+
+**RN**
+- O usuário precisa informar uma nova senha;
+- O link enviado para a recuperação deve expirar em 3 horas;

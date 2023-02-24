@@ -13,9 +13,11 @@ import { AlterUserAddAvatar1661895520259 } from '@shared/infra/typeorm/migration
 import { CreateCars1663368018590 } from './migrations/1663368018590-CreateCars';
 import { CreateSpecificationsCars1664317865460 } from './migrations/1664317865460-CreateSpecificationsCars';
 import { CreateCarImage1664834863881 } from './migrations/1664834863881-CreateCarImage';
-import { CarImage } from '@modules/cars/infra/typeorm/entities/CarImage';
 import { CreateRentals1665434474411 } from './migrations/1665434474411-CreateRentals';
+import { CreateUsersTokens1675764611160 } from './migrations/1675764611160-CreateUsersTokens';
+import { CarImage } from '@modules/cars/infra/typeorm/entities/CarImage';
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
+import { UsersToken } from '@modules/accounts/infra/typeorm/entities/UsersToken';
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -33,7 +35,8 @@ const dataSource = new DataSource({
     CreateCars1663368018590,
     CreateSpecificationsCars1664317865460,
     CreateCarImage1664834863881,
-    CreateRentals1665434474411
+    CreateRentals1665434474411,
+    CreateUsersTokens1675764611160
   ],
   entities: [
     Category,
@@ -41,7 +44,8 @@ const dataSource = new DataSource({
     User,
     Car,
     CarImage,
-    Rental
+    Rental,
+    UsersToken
   ]
 });
 
@@ -49,7 +53,7 @@ export default async (host = 'database_ignite'): Promise<DataSource> => {
   const defaultOptions = dataSource.options;
 
   Object.assign(defaultOptions, {
-    host: process.env.NODE_ENV === "test" ? "localhost" : host,
+    host: process.env.NODE_ENV === "test" ? "localhost" : host, //"127.0.0.1"
     database: process.env.NODE_ENV === "test" ? "rentx_test" : defaultOptions.database
   });
 
