@@ -53,7 +53,7 @@ export default async (host = 'database_ignite'): Promise<DataSource> => {
   const defaultOptions = dataSource.options;
 
   Object.assign(defaultOptions, {
-    host: process.env.NODE_ENV === "test" ? "localhost" : host, //"127.0.0.1"
+    host: process.env.NODE_ENV === "test" ? "localhost" : "127.0.0.1", //host
     database: process.env.NODE_ENV === "test" ? "rentx_test" : defaultOptions.database
   });
 

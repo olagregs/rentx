@@ -2,9 +2,10 @@ import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from "express";
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
+import dotenv from 'dotenv';
 
 import { routes } from "./routes/index.routes";
-import swaggerFile from '../../../swagger.json';
+import swaggerFile from '../../../../swagger.json';
 
 import '@shared/infra/typeorm/dataSource';
 import '@shared/container';
@@ -12,6 +13,7 @@ import { AppError } from '@shared/errors/AppError';
 
 const app = express();
 
+dotenv.config();
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
